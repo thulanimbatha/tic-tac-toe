@@ -16,3 +16,4 @@ def display():
           f'{placement[4]} | {placement[5]} | {placement[6]} \n'
           '--------- \n'
           f'{placement[7]} | {placement[8]} | {placement[9]} \n')
+    
