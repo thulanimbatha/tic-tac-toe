@@ -2,16 +2,6 @@ import board
 
 game_over = False
 turn_count = 0
-X_moves = []
-O_moves = []
-winning_combos = [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,2,1], [3,1,2], #rows
-                  [4,5,6], [4,6,5], [5,4,6], [5,6,4], [6,4,5], [6,5,4],
-                  [7,8,9], [7,9,8], [8,7,9], [8,9,7], [9,7,8], [9,8,7],
-                  [1,4,7], [1,7,4], [4,1,7], [4,7,1], [7,1,4], [7,4,1], #columns
-                  [2,5,8], [2,8,5], [5,2,8], [5,8,2], [8,2,5], [8,5,2],
-                  [3,6,9], [3,9,6], [6,3,9], [6,9,3], [9,3,6], [9,6,3],
-                  [1,5,9], [1,9,5], [5,1,9], [5,9,1], [9,1,5], [9,5,1], #diagonal
-                  [3,5,7], [3,7,5], [5,3,7], [5,7,3], [7,3,5], [7,5,3]]
 
 def player_turn():
       global game_over
@@ -21,7 +11,6 @@ def player_turn():
             if move == 'q': 
                   game_over = True
             else: 
-                  X_moves.append(int(move))
                   board.placement[int(move)] = 'X'
                   turn_count += 1
                   board.display()
@@ -30,23 +19,35 @@ def player_turn():
             if move == 'q': 
                   game_over = True
             else: 
-                  O_moves.append(int(move))
                   board.placement[int(move)] = 'O'
                   turn_count += 1
                   board.display()
 
+def winner():
+      # check if the 3 horizontal plays are the same
+      if (board.placement[1] == board.placement[2] == board.placement[3]) \
+        or (board.placement[4] == board.placement[5] == board.placement[6]) \
+        or (board.placement[7] == board.placement[8] == board.placement[9]):
+            return True
+      # check if the 3 vertical plays are the same
+      elif (board.placement[1] == board.placement[4] == board.placement[7]) \
+         or (board.placement[2] == board.placement[5] == board.placement[8]) \
+         or (board.placement[3] == board.placement[6] == board.placement[9]):
+            return True
+      # check if the 2 diagonal plays are the same
+      elif (board.placement[1] == board.placement[5] == board.placement[9]) \
+         or (board.placement[7] == board.placement[5] == board.placement[3]):
+            return True
+
 board.display()
 while not game_over:
-      player_turn()
-      print(turn_count)
-      if X_moves in winning_combos:
-            print("Winner")
+      if turn_count == 9:
+            print('DRAW!')
             game_over = True
-      elif O_moves in winning_combos:
-            print("Winner")
+      elif not winner():
+            player_turn()
+            print(turn_count)
+      else:
+            print('WINNER!')
             game_over = True
-
-
-
-
-
+      
