@@ -49,7 +49,6 @@ while not game_over:
             game_over = True
       elif not winner():
             player_move()
-            print(turn_count)
       else:
             display()
             turn_count -= 1
