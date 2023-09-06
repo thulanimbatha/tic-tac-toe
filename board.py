@@ -17,6 +17,7 @@ def display():
           '--------- \n'
           f'{placement[7]} | {placement[8]} | {placement[9]} \n')
     
+# conditions for winning 
 def winner():
       # check if the 3 horizontal plays are the same
       if (placement[1] == placement[2] == placement[3]) \
