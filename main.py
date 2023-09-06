@@ -51,6 +51,7 @@ while not game_over:
             player_move()
             print(turn_count)
       else:
+            display()
             turn_count -= 1
             print(f'{player_symbol()} WINS!')
             game_over = True
